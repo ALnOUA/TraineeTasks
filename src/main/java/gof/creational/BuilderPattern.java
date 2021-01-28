@@ -2,11 +2,13 @@ package gof.creational;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.extern.java.Log;
 
+@Log
 public class BuilderPattern {
     public static void main(String[] args) {
         SportCar sportCar = new SportCar.Builder().setColor("green").setHorsePower(250).setSeats(4).build();
-        System.out.println(sportCar.getColor()+sportCar.getHorsePower()+sportCar.getSeats());
+        log.info(sportCar.getColor()+sportCar.getHorsePower()+sportCar.getSeats());
     }
 }
 

@@ -3,11 +3,13 @@ package gof.creational;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Log
 public class PrototypePattern {
     public static void main(String[] args) {
         List<Shape> listOfShapes = new ArrayList<>();
@@ -26,7 +28,7 @@ public class PrototypePattern {
 
         List<Shape> shapesCopy = listOfShapes.stream().peek(x->x.clone()).collect(Collectors.toList());
 
-        System.out.println("Copied array " + shapesCopy);
+        log.info("Copied array " + shapesCopy);
 
     }
 }
@@ -38,13 +40,15 @@ abstract class Shape{
     int x;
     int y;
     String color;
+
+    protected abstract Shape clone();
+
     Shape(Shape shape){
         this();
         this.x = shape.x;
         this.y = shape.y;
         this.color = shape.color;
     }
-    protected abstract Shape clone();
 }
 
 @NoArgsConstructor

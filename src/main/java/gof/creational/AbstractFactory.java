@@ -1,5 +1,7 @@
 package gof.creational;
 
+import lombok.extern.java.Log;
+
 public class AbstractFactory {
     public static void main(String[] args) {
         AbstractFurnitureFactory abstractFurnitureFactory = new AbstractFurnitureFactory();
@@ -23,107 +25,115 @@ interface Sofa{
     void hasLegs();
 }
 
+@Log
 class VictorianGoldSofa implements Sofa {
 
     @Override
     public void sitOn() {
-        System.out.println("sit on victorian gold sofa");
+        log.info("sit on victorian gold sofa");
     }
 
     @Override
     public void hasLegs() {
-        System.out.println("has 4 legs");
+        log.info("has 4 legs");
     }
 }
 
+@Log
 class VictorianSilverSofa implements Sofa {
 
     @Override
     public void sitOn() {
-        System.out.println("sit on victorian silver sofa");
+        log.info("sit on victorian silver sofa");
     }
 
     @Override
     public void hasLegs() {
-        System.out.println("has 4 legs");
+        log.info("has 4 legs");
     }
 }
 
+@Log
 class ModernGoldSofa implements Sofa {
 
     @Override
     public void sitOn() {
-        System.out.println("sit on modern gold sofa");
+        log.info("sit on modern gold sofa");
     }
 
     @Override
     public void hasLegs() {
-        System.out.println("has 4 legs");
+        log.info("has 4 legs");
     }
 }
 
+@Log
 class ModernSilverSofa implements Sofa {
 
     @Override
     public void sitOn() {
-        System.out.println("sit on modern silver sofa");
+        log.info("sit on modern silver sofa");
     }
 
     @Override
     public void hasLegs() {
-        System.out.println("has 4 legs");
+        log.info("has 4 legs");
     }
 }
 
+@Log
 class VictorianWoodChair implements Chair {
 
     @Override
     public void sitOn() {
-        System.out.println("sit on victorian wood chair");
+        log.info("sit on victorian wood chair");
     }
 
     @Override
     public void hasLegs() {
-        System.out.println("has 4 legs");
+        log.info("has 4 legs");
     }
 }
 
+@Log
 class VictorianIronChair implements Chair {
 
     @Override
     public void sitOn() {
-        System.out.println("sit on victorian iron chair");
+        log.info("sit on victorian iron chair");
     }
 
     @Override
     public void hasLegs() {
-        System.out.println("has 4 legs");
+        log.info("has 4 legs");
     }
 }
 
+@Log
 class ModernWoodChair implements Chair {
 
     @Override
     public void sitOn() {
-        System.out.println("sit on modern wood chair");
+        log.info("sit on modern wood chair");
     }
 
     @Override
     public void hasLegs() {
-        System.out.println("has 4 legs");
+        log.info("has 4 legs");
     }
 }
 
+@Log
 class ModernIronChair implements Chair {
 
     @Override
     public void sitOn() {
-        System.out.println("sit on modern iron chair");
+        log.info("sit on modern iron chair");
     }
 
     @Override
     public void hasLegs() {
-        System.out.println("has 4 legs");
+        log.info("has 4 legs");
     }
 }
 

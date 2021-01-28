@@ -1,12 +1,15 @@
 package gof.behavioral;
 
+import lombok.extern.java.Log;
+
+@Log
 public class StrategyPattern {
     public static void main(String[] args) {
         double startPrice = 100.0;
         ContextStrategy halfPriceStrategy = new ContextStrategy(new HalfPriceStrategy());
         ContextStrategy doublePriceStrategy = new ContextStrategy(new DoublePriceStrategy());
-        System.out.println(halfPriceStrategy.getPrice(startPrice));
-        System.out.println(doublePriceStrategy.getPrice(startPrice));
+        log.info(String.valueOf(halfPriceStrategy.getPrice(startPrice)));
+        log.info(String.valueOf(doublePriceStrategy.getPrice(startPrice)));
     }
 }
 
