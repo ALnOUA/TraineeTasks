@@ -1,0 +1,12 @@
+# Intellij
+.idea/
+*.iml
+*.iws
+
+# Windows
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Maven
+log/
+target/
