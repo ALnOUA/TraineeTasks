@@ -11,7 +11,12 @@ public class HashMapExample {
         hashMap.put(new Key(3), new Value(234));
         hashMap.put(new Key(4), new Value(425));
 
+
         log.info(String.valueOf(hashMap.containsKey(new Key(2))));
         log.info(String.valueOf(hashMap.get(new Key(4)).getValue()));
+        System.out.println(hashMap.getMyHashMap().length);
+        hashMap.resize();
+        System.out.println(hashMap.getMyHashMap().length);
+        hashMap.remove(new Key(6));
     }
 }

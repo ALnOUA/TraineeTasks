@@ -1,10 +1,12 @@
 package collections.map;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.LinkedList;
 
 @NoArgsConstructor
+@Getter
 public class MyHashMap {
 
     LinkedList<Entry>[] myHashMap = new LinkedList[2];

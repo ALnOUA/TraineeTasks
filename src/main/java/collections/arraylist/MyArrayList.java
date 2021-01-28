@@ -6,6 +6,7 @@ import lombok.Getter;
 public class MyArrayList {
     private String[] array = new String[10];
     private int size = 0;
+
     public void add(String s){
         array[size]=s;
         size++;

@@ -1,10 +1,21 @@
 package collections.linkedlist;
 
+import lombok.Getter;
 import lombok.extern.java.Log;
 
 @Log
+@Getter
 public class MyLinkedList {
-    Node head;
+     private int size=0;
+     Node head;
+    public int get(int index){
+        Node n = head;
+        for (int i = 0; i < index; i++) {
+            n = n.next;
+        }
+        return n.data;
+    }
+
     public void insert(int data){
         Node node = new Node();
         node.data = data;
@@ -12,6 +23,7 @@ public class MyLinkedList {
 
         if(head==null){
             head=node;
+            size++;
         }
         else {
             Node n = head;
@@ -19,6 +31,7 @@ public class MyLinkedList {
                 n= n.next;
             }
             n.next=node;
+            size++;
         }
     }
     public void show(){
@@ -35,6 +48,7 @@ public class MyLinkedList {
         node.next = null;
         node.next = head;
         head = node;
+        size++;
     }
     public void insertAt(int index, int data){
         Node node = new Node();
@@ -43,6 +57,7 @@ public class MyLinkedList {
 
         if(index==0){
             insertAtStart(data);
+            size++;
         }
         else {
 
@@ -52,11 +67,13 @@ public class MyLinkedList {
             }
             node.next = n.next;
             n.next = node;
+            size++;
         }
     }
     public void deleteAt(int index){
         if(index==0){
             head=head.next;
+            size--;
         }
         else {
             Node n = head;
@@ -67,6 +84,7 @@ public class MyLinkedList {
             n1=n.next;
             n.next=n1.next;
             n.next=n1.next;
+            size--;
         }
 
     }
