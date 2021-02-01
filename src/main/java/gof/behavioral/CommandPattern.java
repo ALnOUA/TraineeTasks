@@ -1,5 +1,7 @@
 package gof.behavioral;
 
+import lombok.extern.java.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,20 +19,22 @@ interface Command{
     void execute();
 }
 
+@Log
 class MouseClick implements Command {
 
     @Override
     public void execute() {
-        System.out.println("click command");
+        log.info("click command");
     }
 
 }
 
+@Log
 class MousePress implements Command {
 
     @Override
     public void execute() {
-        System.out.println("press command");
+        log.info("press command");
     }
 }
 

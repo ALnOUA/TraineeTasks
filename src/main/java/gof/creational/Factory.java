@@ -1,5 +1,7 @@
 package gof.creational;
 
+import lombok.extern.java.Log;
+
 class Factory{
     public static void main(String[] args) {
         ButtonFactory buttonFactory = new ButtonFactory();
@@ -13,18 +15,19 @@ class Factory{
 interface Button{
     void onClick();
 }
-
+@Log
 class WindowsButton implements Button {
 
     public void onClick() {
-        System.out.println("Windows button action");
+        log.info("Windows button action");
     }
 }
 
+@Log
 class HtmlButton implements Button {
 
     public void onClick() {
-        System.out.println("Html button action");
+        log.info("Html button action");
     }
 }
 

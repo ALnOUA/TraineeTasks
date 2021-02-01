@@ -1,11 +1,14 @@
 package gof.behavioral;
 
+import lombok.extern.java.Log;
+
+@Log
 public class IteratorPattern {
     public static void main(String[] args) {
         ArrayContainer arrayContainer = new ArrayContainer();
         Iterator iterator = arrayContainer.getIterator();
         while (iterator.hasNext()){
-            System.out.println(iterator.next());
+            log.info((String) iterator.next());
         }
     }
 }

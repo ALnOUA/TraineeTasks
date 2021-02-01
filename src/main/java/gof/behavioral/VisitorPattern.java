@@ -1,5 +1,7 @@
 package gof.behavioral;
 
+import lombok.extern.java.Log;
+
 public class VisitorPattern {
     public static void main(String[] args) {
         Vechicle car = new Car();
@@ -34,14 +36,15 @@ interface Visitor{
     void driveTruck();
 }
 
+@Log
 class ConcreteVisitors implements Visitor {
     @Override
     public void driveCar() {
-        System.out.println("drive car");
+        log.info("drive car");
     }
 
     @Override
     public void driveTruck() {
-        System.out.println("drive truck");
+        log.info("drive truck");
     }
 }
