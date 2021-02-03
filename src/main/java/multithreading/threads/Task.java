@@ -5,6 +5,7 @@ package multithreading.threads;
 import lombok.AllArgsConstructor;
 import lombok.extern.java.Log;
 import multithreading.resources.ResourceClass;
+import multithreading.utils.ThreadTaskHelper;
 
 import java.util.Map;
 import java.util.concurrent.*;
@@ -15,23 +16,17 @@ public class Task {
     private static Map<String, Integer> commonResource = resourceClass.getCommonResource();
 
     public static void main(String[] args) throws InterruptedException {
+        ThreadTaskHelper threadTaskHelper = new ThreadTaskHelper();
         ExecutorService executorService = Executors.newScheduledThreadPool(10);
         ThreadIncrementingValue thread = new ThreadIncrementingValue(resourceClass);
         ThreadPrintResult threadPrintResult = new ThreadPrintResult(commonResource);
+
+
         for (int i = 0; i < 10; i++) {
             executorService.submit(thread);
         }
-        executorService.shutdown(); //if something goes wrong with shutDown, it will be forced
-        if(executorService.awaitTermination(5,TimeUnit.SECONDS)){
-            log.info("======>All tasks are done<===============");
-        }
-        else{
-            executorService.shutdownNow();
-            log.info("==============>Forced interruption<================== ");
-            if(executorService.isTerminated()){
-                log.info("==============>Forced interruption has been done successfully<================== ");
-            }
-        }
+
+        threadTaskHelper.endWorkWithThreads(executorService);
 
         while(true){
             if (executorService.isTerminated()){
