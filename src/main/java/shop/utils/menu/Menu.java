@@ -27,9 +27,16 @@ public class Menu {
             printMenu();
             try {
                 String line = reader.readLine();
-                int choice = Integer.parseInt(line);
-                MenuEntry entry =  entries.get(choice - 1);
-                entry.run();
+                try {
+                    int choice = Integer.parseInt(line);
+                    if(!(choice<1 || choice>entries.size())) {
+                        MenuEntry entry = entries.get(choice - 1);
+                        entry.run();
+                    }
+                    else System.out.println("Wrong input data");
+                }catch (NumberFormatException e){
+                    e.printStackTrace();
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
