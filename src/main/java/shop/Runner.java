@@ -1,11 +1,9 @@
 package shop;
 
-import shop.model.Food;
 import shop.model.Product;
 import shop.services.BucketService;
 import shop.services.ProductService;
 import shop.utils.Helper;
-import shop.utils.Resources;
 import shop.utils.menu.Menu;
 import shop.utils.menu.MenuEntry;
 import java.util.List;
@@ -46,7 +44,7 @@ public class Runner {
         return new MenuEntry("Show bucket") {
                 Menu bucketMenu = new Menu();
                 @Override
-                public void run() {
+                public void run() throws Exception {
                     helper.showListToConsole(bucketService.getAllProductsFromBucket());
                     System.out.println("Chose what product you want to delete from bucket");
                     List<Product> allProductsFromBucket = bucketService.getAllProductsFromBucket();
@@ -73,14 +71,14 @@ public class Runner {
             Menu notFoodMenu = new Menu();
 
             @Override
-            public void run() {
+            public void run() throws Exception {
                 System.out.println("Chose what product you want to add to bucket:");
                 List<Product> allNotFoods = allNotFoods2;
                 for (int i = 0; i <= allNotFoods.size() - 1; i++) {
                     int var = i;
                     notFoodMenu.addEntry(new MenuEntry(allNotFoods.get(i).getName()+" ["+allNotFoods.get(i).getPrice()+" "+allNotFoods.get(i).getCurrency().getName()+"] ") {
                         @Override
-                        public void run() {
+                        public void run() throws Exception {
                             productService.addProductToBucket(allNotFoods.get(var));
                             System.out.println("Product " + allNotFoods.get(var).getName() + " was successfully added");
                         }
@@ -97,14 +95,14 @@ public class Runner {
             Menu notFoodMenu = new Menu();
 
             @Override
-            public void run() {
+            public void run() throws Exception {
                 System.out.println("Chose what product you want to add to bucket:");
                 List<Product> localAllFoods = allFoods;
                 for (int i = 0; i <= localAllFoods.size() - 1; i++) {
                     int var = i;
                     notFoodMenu.addEntry(new MenuEntry(localAllFoods.get(i).getName()+" ["+localAllFoods.get(i).getPrice()+" "+localAllFoods.get(i).getCurrency().getName()+"] ") {
                         @Override
-                        public void run() {
+                        public void run() throws Exception {
                             productService.addProductToBucket(localAllFoods.get(var));
                             System.out.println("Product " + localAllFoods.get(var).getName() + " was successfully added");
                         }
@@ -121,7 +119,7 @@ public class Runner {
         return new MenuEntry("Product menu") {
                 Menu productMenu = new Menu();
                 @Override
-                public void run() {
+                public void run() throws Exception {
                     productMenu.addEntry(food);
                     productMenu.addEntry(notFood);
                     productMenu.run();
@@ -134,7 +132,7 @@ public class Runner {
         return new MenuEntry("Bucket menu") {
                 Menu bucketMenu = new Menu();
                 @Override
-                public void run() {
+                public void run() throws Exception {
                     bucketMenu.addEntry(showBucket);
                     bucketMenu.run();
 

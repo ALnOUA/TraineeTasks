@@ -1,6 +1,7 @@
 package shop.services;
 
 import lombok.Data;
+import shop.model.CurrencyPicker;
 import shop.model.Product;
 import java.util.List;
 import static shop.utils.Resources.db_online_shop;
@@ -9,13 +10,13 @@ import static shop.utils.Resources.helper;
 @Data
 public class ProductService {
 
-    public void addProductToBucket(Product product){
+    public void addProductToBucket(Product product) throws Exception {
         if(product.getCurrency().getName().equalsIgnoreCase("uah")){
         product.setPrice((long) (product.getPrice()*product.getCurrency().getMultiplicity()));
         }
-      //use strategy
         else {
-
+            CurrencyPicker currencyPicker = new CurrencyPicker();
+            product.setPrice(currencyPicker.choosePrice(product.getCurrency().getName()).getPrice(product.getPrice()));
         }
         db_online_shop.addProductToBucket(product);
      }

@@ -21,7 +21,7 @@ public class Menu {
         });
     }
 
-    public void run() {
+    public void run() throws Exception {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (!isExit) {
             printMenu();
