@@ -54,7 +54,4 @@ public class Menu {
     public void addEntry(MenuEntry entry) {
         this.entries.add(entry);
     }
-    public void removeEntry(MenuEntry entry){
-        this.entries.remove(entry);
-    }
 }

@@ -2,6 +2,7 @@ package shop.services;
 
 import org.junit.Before;
 import org.junit.Test;
+import shop.model.Currency;
 import shop.model.Food;
 import shop.model.NotFood;
 import shop.utils.db_imitation.DB_Online_Shop;
@@ -14,9 +15,9 @@ public class BucketServiceTest {
     DB_Online_Shop db_online_shop = new DB_Online_Shop();
     @Before
     public void setUp() throws Exception {
-        db_online_shop.addProductToBucket(new Food("Banana"));
-        db_online_shop.addProductToBucket(new Food("Cherry"));
-        db_online_shop.addProductToBucket(new NotFood("Car"));
+        db_online_shop.addProductToBucket(new Food("Banana",new Currency(2,"USD",28,0.2),20,6));
+        db_online_shop.addProductToBucket(new Food("Cherry",new Currency(2,"USD",28,0.2),20,6));
+        db_online_shop.addProductToBucket(new NotFood("Car",new Currency(2,"USD",28,0.2),20));
     }
 
     @Test

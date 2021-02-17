@@ -1,10 +1,18 @@
 package shop.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
-@AllArgsConstructor
 public class NotFood extends Product{
-    private String name;
+    public NotFood(String name,Currency currency, long price) {
+        super(name,currency,price);
+    }
+
+    @Override
+    public String toString() {
+        return "NotFood{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }

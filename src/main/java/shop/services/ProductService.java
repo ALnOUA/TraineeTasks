@@ -10,7 +10,14 @@ import static shop.utils.Resources.helper;
 public class ProductService {
 
     public void addProductToBucket(Product product){
-         db_online_shop.addProductToBucket(product);
+        if(product.getCurrency().getName().equalsIgnoreCase("uah")){
+        product.setPrice((long) (product.getPrice()*product.getCurrency().getMultiplicity()));
+        }
+      //use strategy
+        else {
+
+        }
+        db_online_shop.addProductToBucket(product);
      }
      public void showAllProducts(){
         helper.showListToConsole(db_online_shop.getAllProducts());
