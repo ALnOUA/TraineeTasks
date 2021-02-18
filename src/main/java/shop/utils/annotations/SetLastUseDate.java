@@ -13,16 +13,3 @@ import java.lang.reflect.Method;
 public @interface SetLastUseDate{
        int setExpirationDays() default 1;
 }
-
-class ExpirationDaysSetter {
-
-    public void process(Object instance, Food food) {
-        Class<?> clazz = instance.getClass();
-        for (Method m : clazz.getDeclaredMethods()) {
-            if (m.isAnnotationPresent(SetLastUseDate.class)) {
-                SetLastUseDate annotation = m.getAnnotation(SetLastUseDate.class);
-                food.setExpirationDays(annotation.setExpirationDays());
-            }
-        }
-    }
-}
