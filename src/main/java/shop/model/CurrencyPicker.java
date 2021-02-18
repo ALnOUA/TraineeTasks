@@ -5,14 +5,14 @@ import lombok.Data;
 @Data
 public class CurrencyPicker {
     public static Context context;
-    public Context choosePrice(String currency) throws Exception {
+    public Context choosePrice(String currency) throws UnsupportedOperationException {
         Context context = null;
         switch (currency.toLowerCase()){
             case "usd": context = new Context(new Dollar());break;
             case "eur": context = new Context(new Euro());break;
             default:
                 System.out.println("Not supported currency");
-                throw new Exception("Not supported currency");
+                throw new UnsupportedOperationException("Not supported currency");
         }
         return context;
     }
@@ -26,14 +26,14 @@ public class CurrencyPicker {
 
         @Override
         public long getPrice(long price) {
-            return price*8L;
+            return price*27;
         }
     }
     class Euro implements CurrencyStrategy{
 
         @Override
         public long getPrice(long price) {
-            return price*8;
+            return price*30;
         }
     }
 

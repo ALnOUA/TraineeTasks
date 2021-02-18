@@ -1,18 +1,23 @@
 package shop.model;
 
 import lombok.Data;
+import shop.utils.annotations.SetLastUseDate;
 
 import java.time.LocalDateTime;
 
 @Data
 public class Food extends Product implements Expirable  {
     private static long serialVersionUUID = 1095611956833581415L;
-    private int expirationDate;
+    private int expirationDays=0;
     private LocalDateTime useBeforeData;
 
-    public Food(String name,Currency currency, long price,int expirationDate) {
+    public Food(String name,Currency currency, long price,int expirationDays) {
         super(name,currency,price);
-        this.expirationDate=expirationDate;
+        this.expirationDays = expirationDays;
+        this.useBeforeData=setLastUseDate();
+    }
+    public Food(String name,Currency currency, long price) {
+        super(name,currency,price);
         this.useBeforeData=setLastUseDate();
     }
 
@@ -20,14 +25,15 @@ public class Food extends Product implements Expirable  {
     public String toString() {
         return "Food{" +
                 "useBeforeData=" + useBeforeData +
+                ", Expiration days " + expirationDays+
                 ", currency=" + currency +
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 '}';
     }
 
-    @Override
+    @SetLastUseDate(setExpirationDays = 45)
     public LocalDateTime setLastUseDate() {
-        return LocalDateTime.now().plusDays(expirationDate);
+        return LocalDateTime.now().plusDays(expirationDays);
     }
 }
