@@ -1,30 +1,86 @@
 package shop.utils.db_imitation;
 
 import lombok.Data;
-import shop.model.Food;
-import shop.model.NotFood;
-import shop.model.Product;
+import shop.model.*;
+import shop.services.BucketService;
+import shop.services.ProductService;
+import shop.utils.annotations.SetLastUseDate;
 
+import java.lang.reflect.Method;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Data
 public class DB_Online_Shop {
+    private ProductService productService = new ProductService();
     private static List<Product> productList = new ArrayList();
-    private static List<Product> bucket = new ArrayList<>();
+    private static List<Product> bucket = new ArrayList<>();// TODO: 17.02.2021 add opportunity to have many user`s bucket.
+    private static HashMap<String,ArrayList<Product>> warehouse = new HashMap<>();
 
     public  void initProducts(){
         if (productList.isEmpty()) {
-            productList.add(new Food("Banana"));
-            productList.add(new Food("Pineapple"));
-            productList.add(new Food("Cherry"));
-            productList.add(new NotFood("Table"));
-            productList.add(new NotFood("Chair"));
-            productList.add(new NotFood("Car"));
-            productList.add(new NotFood("Door"));
+            productList.add(new Food("Banana",new Currency(2,"USD",28,1.2),20,20));
+            productList.add(new Food("Pineapple",new Currency(2,"USD",28,0.2),25,2));
+            productList.add(new Food("Apple",new Currency(2,"USD",28,1.2),30,5));
+            productList.add(new Food("Cherry",new Currency(2,"USD",28,1.2),10,45));
+            productList.add(new NotFood("Car",new Currency(2,"USD",28,1.2),1000));
+            productList.add(new NotFood("Table",new Currency(2,"USD",28,1.2),200));
+            productList.add(new NotFood("TV",new Currency(2,"USD",28,1.2),1500));
+
+            // TODO: 17.02.2021 use warehouse somewhere
+            /*addProductToWareHouse(new Food("Banana",new Currency(2,"USD",28,1.2),20,20));
+            addProductToWareHouse(new Food("Banana",new Currency(2,"USD",28,1.2),20,20));
+            addProductToWareHouse(new Food("Apple",new Currency(2,"USD",28,1.2),30,5));*/
         }
+
+        addProductToWareHouse(new Food("Banana",new Currency(2,"USD",28,1.2),20,20));
+        addProductToWareHouse(new Food("Cherry",new Currency(2,"USD",28,1.2),20));
+        System.out.println(warehouse.get("Cherry"));
+        System.out.println(warehouse);
+
     }
 
+    public void addProductToWareHouse(Product product){
+        if(productService.hasExpireInfo(product)) {
+            if (product instanceof Expirable && (((Food) product).getUseBeforeData().isBefore(LocalDateTime.now()))) {
+                System.out.println(product + " is out of Date");
+                // TODO: 17.02.2021 add logic when product is out of date
+
+            }
+        }
+        else {
+            Class<?> clazz = product.getClass();
+            for (Method m : clazz.getDeclaredMethods()) {
+                if (m.isAnnotationPresent(SetLastUseDate.class)) {
+                    SetLastUseDate annotation = m.getAnnotation(SetLastUseDate.class);
+                    ((Food)product).setExpirationDays(annotation.setExpirationDays());
+                }
+            }
+        }
+
+
+        boolean elementFound=false;
+        for (Map.Entry<String, ArrayList<Product>> entry : warehouse.entrySet()) {
+            if (product.getName().equalsIgnoreCase(entry.getKey())){
+                entry.getValue().add(product);
+               elementFound=true;
+                break;
+            }
+
+        }
+        if (!elementFound){
+            ArrayList<Product> bufList = new ArrayList<>();
+            bufList.add(product);
+            warehouse.put(product.getName(),bufList);
+
+        }
+
+
+
+    }
     public void addProductToBucket(Product product){
         bucket.add(product);
     }
@@ -71,5 +127,18 @@ public class DB_Online_Shop {
                 productList.add(product);
         }
         return productList;
+    }
+
+    class ExpirationDaysSetter {
+
+        public void process(Object instance, Food food) {
+            Class<?> clazz = instance.getClass();
+            for (Method m : clazz.getDeclaredMethods()) {
+                if (m.isAnnotationPresent(SetLastUseDate.class)) {
+                    SetLastUseDate annotation = m.getAnnotation(SetLastUseDate.class);
+                    food.setExpirationDays(annotation.setExpirationDays());
+                }
+            }
+        }
     }
 }

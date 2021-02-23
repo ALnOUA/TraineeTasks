@@ -1,16 +1,36 @@
 package shop.services;
 
 import lombok.Data;
+import shop.model.CurrencyPicker;
+import shop.model.Expirable;
+import shop.model.Food;
 import shop.model.Product;
+
 import java.util.List;
 import static shop.utils.Resources.db_online_shop;
 import static shop.utils.Resources.helper;
 
 @Data
 public class ProductService {
+    public void addProductToBucket(Product product) throws RuntimeException {
+        if(product.getCurrency().getName().equalsIgnoreCase("uah")){
+        product.setPrice((long) (product.getPrice()*product.getCurrency().getMultiplicity()));
+        }
+        else {
+            CurrencyPicker currencyPicker = new CurrencyPicker();
 
-    public void addProductToBucket(Product product){
-         db_online_shop.addProductToBucket(product);
+            product.setPrice(currencyPicker.choosePrice(product.getCurrency().getName()).getPrice(product.getPrice()));
+        }
+        db_online_shop.addProductToBucket(product);
+     }
+     public boolean hasExpireInfo(Product product){
+         if(product instanceof Expirable){
+             if(((Food)product).getExpirationDays()!=0){
+                 return true;
+             }
+             return false;
+         }
+         return false;
      }
      public void showAllProducts(){
         helper.showListToConsole(db_online_shop.getAllProducts());

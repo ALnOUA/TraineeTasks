@@ -2,6 +2,7 @@ package shop.services;
 
 import org.junit.Before;
 import org.junit.Test;
+import shop.model.Currency;
 import shop.model.Food;
 import shop.utils.db_imitation.DB_Online_Shop;
 
@@ -19,8 +20,8 @@ public class ProductServiceTest {
 
     @Test
     public void addProductToBucket() {
-        db_online_shop.addProductToBucket(new Food("Fa"));
-        db_online_shop.addProductToBucket(new Food("Do"));
+        db_online_shop.addProductToBucket(new Food("Banana",new Currency(2,"USD",28,0.2),20,2));
+        db_online_shop.addProductToBucket(new Food("Apple",new Currency(2,"USD",28,0.2),20,4));
         int currentNumOfProducts = db_online_shop.getAllProductsFromBucket().size();
         assertEquals(2,currentNumOfProducts);
     }
