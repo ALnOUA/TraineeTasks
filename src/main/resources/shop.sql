@@ -77,9 +77,31 @@ DELIMITER //
 CREATE PROCEDURE SHOW_HISTORY(IN id INT)
 
 BEGIN
+  DECLARE sum INT;
 
-  SELECT*FROM orders inner join users u on orders.user_id = u.user_id where u.user_id=id ;
+   SELECT u.user_id,
+          o.product_id,
+          p.price
+   FROM orders as o
+      inner join users u on o.user_id = u.user_id
+      inner join products p on o.product_id = p.product_id
+      where u.user_id=id;
+      call GET_SUM(id);
 
+END//
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE GET_SUM(IN id INT)
+
+BEGIN
+  SELECT sum(p.price)
+  FROM orders as o
+         inner join users u on o.user_id = u.user_id
+         inner join products p on o.product_id = p.product_id
+  where u.user_id=id;
 END//
 
 DELIMITER ;
