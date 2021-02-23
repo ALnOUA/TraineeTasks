@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class NotFood extends Product{
-    public NotFood(String name,Currency currency, long price) {
-        super(name,currency,price);
+    public NotFood(int id,String name,Currency currency, long price) {
+        super(id,name,currency,price);
     }
 
     @Override
