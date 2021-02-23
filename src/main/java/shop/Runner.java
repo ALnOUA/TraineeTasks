@@ -90,6 +90,13 @@ public class Runner {
             public void run() throws Exception {
                 System.out.println("Chose what product you want to add to bucket:");
                 List<Product> allNotFoods = allNotFoods2;
+                getNotFoodsMenu(allNotFoods);
+                notFoodMenu.run();
+
+
+            }
+
+            private void getNotFoodsMenu(List<Product> allNotFoods) {
                 for (int i = 0; i <= allNotFoods.size() - 1; i++) {
                     int var = i;
                     notFoodMenu.addEntry(new MenuEntry(allNotFoods.get(i).getName()+" ["+allNotFoods.get(i).getPrice()+" "+allNotFoods.get(i).getCurrency().getName()+"] ") {
@@ -100,9 +107,6 @@ public class Runner {
                         }
                     });
                 }
-                notFoodMenu.run();
-
-
             }
         };
     }
@@ -114,6 +118,13 @@ public class Runner {
             public void run() throws Exception {
                 System.out.println("Chose what product you want to add to bucket:");
                 List<Product> localAllFoods = allFoods;
+                getFoodsMenu(localAllFoods);
+                food.run();
+
+
+            }
+
+            private void getFoodsMenu(List<Product> localAllFoods) {
                 for (int i = 0; i <= localAllFoods.size() - 1; i++) {
                     int var = i;
                     food.addEntry(new MenuEntry(localAllFoods.get(i).getName()+" ["+localAllFoods.get(i).getPrice()+" "+localAllFoods.get(i).getCurrency().getName()+"] ") {
@@ -124,9 +135,6 @@ public class Runner {
                         }
                     });
                 }
-                food.run();
-
-
             }
         };
     }
