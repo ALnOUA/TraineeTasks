@@ -6,13 +6,14 @@ import shop.model.Expirable;
 import shop.model.Food;
 import shop.model.Product;
 
+import java.sql.SQLException;
 import java.util.List;
 import static shop.utils.Resources.db_online_shop;
 import static shop.utils.Resources.helper;
 
 @Data
 public class ProductService {
-    public void addProductToBucket(Product product) throws RuntimeException {
+    public void addProductToBucket(Product product) throws RuntimeException, SQLException {
         if(product.getCurrency().getName().equalsIgnoreCase("uah")){
         product.setPrice((long) (product.getPrice()*product.getCurrency().getMultiplicity()));
         }

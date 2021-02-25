@@ -1,30 +1,45 @@
 package shop;
 
 import shop.model.Product;
+import shop.model.User;
 import shop.services.BucketService;
 import shop.services.ProductService;
 import shop.utils.Helper;
+import shop.utils.db_imitation.DB_Online_Shop;
 import shop.utils.menu.Menu;
 import shop.utils.menu.MenuEntry;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 import java.util.List;
 
 import static shop.utils.Resources.db_online_shop;
 import static shop.utils.Resources.helper;
 
 public class Runner {
-
-
     public static void main(String[] args) throws Exception {
+        User user = new User();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Enter your name:");
+        String line = reader.readLine();
+        user.setUserName(line);
+        user.setId(1);
+        db_online_shop.initUser(user);
+
         Helper helper = new Helper();
         ProductService productService = new ProductService();
         BucketService bucketService = new BucketService();
+        db_online_shop.initProducts();
         int sizeOfBucket = helper.downloadBucketList().size();
         if(sizeOfBucket!=0){
             for(Product product:helper.downloadBucketList()){
                 productService.addProductToBucket(product);
             }
         }
-        db_online_shop.initProducts();
 
         MenuEntry showBucket = getShowBucketEntry(bucketService);
         MenuEntry food = getFoodMenuEntry(productService, "Food", productService.getAllFoods());
@@ -36,6 +51,7 @@ public class Runner {
         Menu menu = new Menu();
         menu.addEntry(productList);
         menu.addEntry(bucketList);
+        menu.addEntry(getSaveBucketEntry(bucketService,user));
         menu.run();
         helper.saveBucketList(bucketService.getAllProductsFromBucket());
     }
@@ -74,6 +90,13 @@ public class Runner {
             public void run() throws Exception {
                 System.out.println("Chose what product you want to add to bucket:");
                 List<Product> allNotFoods = allNotFoods2;
+                getNotFoodsMenu(allNotFoods);
+                notFoodMenu.run();
+
+
+            }
+
+            private void getNotFoodsMenu(List<Product> allNotFoods) {
                 for (int i = 0; i <= allNotFoods.size() - 1; i++) {
                     int var = i;
                     notFoodMenu.addEntry(new MenuEntry(allNotFoods.get(i).getName()+" ["+allNotFoods.get(i).getPrice()+" "+allNotFoods.get(i).getCurrency().getName()+"] ") {
@@ -84,23 +107,27 @@ public class Runner {
                         }
                     });
                 }
-                notFoodMenu.run();
-
-
             }
         };
     }
     private static MenuEntry getFoodMenuEntry(ProductService productService, String food, List<Product> allFoods) {
         return new MenuEntry(food) {
-            Menu notFoodMenu = new Menu();
+            Menu food = new Menu();
 
             @Override
             public void run() throws Exception {
                 System.out.println("Chose what product you want to add to bucket:");
                 List<Product> localAllFoods = allFoods;
+                getFoodsMenu(localAllFoods);
+                food.run();
+
+
+            }
+
+            private void getFoodsMenu(List<Product> localAllFoods) {
                 for (int i = 0; i <= localAllFoods.size() - 1; i++) {
                     int var = i;
-                    notFoodMenu.addEntry(new MenuEntry(localAllFoods.get(i).getName()+" ["+localAllFoods.get(i).getPrice()+" "+localAllFoods.get(i).getCurrency().getName()+"] ") {
+                    food.addEntry(new MenuEntry(localAllFoods.get(i).getName()+" ["+localAllFoods.get(i).getPrice()+" "+localAllFoods.get(i).getCurrency().getName()+"] ") {
                         @Override
                         public void run() throws Exception {
                             productService.addProductToBucket(localAllFoods.get(var));
@@ -108,9 +135,6 @@ public class Runner {
                         }
                     });
                 }
-                notFoodMenu.run();
-
-
             }
         };
     }
@@ -139,5 +163,17 @@ public class Runner {
                 }
 
             };
+    }
+    private static MenuEntry getSaveBucketEntry(BucketService bucketService, User user) {
+        return new MenuEntry("Save bucket menu") {
+            @Override
+            public void run() throws Exception {
+                for (Product product:bucketService.getAllProductsFromBucket()){
+                    bucketService.saveBucket(product,user);
+                }
+
+            }
+
+        };
     }
 }

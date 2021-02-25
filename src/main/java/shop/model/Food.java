@@ -11,13 +11,19 @@ public class Food extends Product implements Expirable  {
     private int expirationDays=0;
     private LocalDateTime useBeforeData;
 
-    public Food(String name,Currency currency, long price,int expirationDays) {
-        super(name,currency,price);
+    public Food(int id, String name,Currency currency, long price,int expirationDays) {
+        super(id,name,currency,price);
         this.expirationDays = expirationDays;
         this.useBeforeData=setLastUseDate();
     }
-    public Food(String name,Currency currency, long price) {
-        super(name,currency,price);
+    public Food(int id,String name,Currency currency, long price) {
+        super(id,name,currency,price);
+        this.useBeforeData=setLastUseDate();
+    }
+
+    public Food(int id, String name, Currency currency, int price, int expirationDays) {
+        super(id, name, currency, price);
+        this.expirationDays = expirationDays;
         this.useBeforeData=setLastUseDate();
     }
 
