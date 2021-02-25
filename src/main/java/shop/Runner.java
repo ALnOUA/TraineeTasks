@@ -5,16 +5,12 @@ import shop.model.User;
 import shop.services.BucketService;
 import shop.services.ProductService;
 import shop.utils.Helper;
-import shop.utils.db_imitation.DB_Online_Shop;
+import shop.dao.DB_Online_Shop;
 import shop.utils.menu.Menu;
 import shop.utils.menu.MenuEntry;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.Statement;
 import java.util.List;
 
 import static shop.utils.Resources.db_online_shop;

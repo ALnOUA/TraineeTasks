@@ -27,6 +27,10 @@ public class Food extends Product implements Expirable  {
         this.useBeforeData=setLastUseDate();
     }
 
+    public Food(int id, String name, long price) {
+        super(id, name, price);
+    }
+
     @Override
     public String toString() {
         return "Food{" +
