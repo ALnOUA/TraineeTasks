@@ -33,10 +33,10 @@ public class ProductService {
          }
          return false;
      }
-     public void showAllProducts(){
+     public void showAllProducts() throws SQLException {
         helper.showListToConsole(db_online_shop.getAllProducts());
      }
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() throws SQLException {
         return  db_online_shop.getAllProducts();
     }
     public  List<Product> getAllFoods(){
@@ -45,7 +45,7 @@ public class ProductService {
     public  List<Product> getAllNotFoods(){
         return db_online_shop.getAllNotFood();
     }
-    public void showAllProductsFromBucket(){
+    public void showAllProductsFromBucket() throws SQLException {
         helper.showListToConsole(db_online_shop.getAllProducts());
     }
      public void showFoods(){
@@ -53,6 +53,10 @@ public class ProductService {
      }
      public void showNotFoods(){
         helper.showListToConsole(db_online_shop.getAllNotFood());
+     }
+
+     public void deleteProductById(int id) throws SQLException {
+        db_online_shop.deleteProductById(id);
      }
 
 }

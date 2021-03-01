@@ -20,10 +20,10 @@ public class BucketService {
     public void clearBucket(){
         db_online_shop.deleteAllProductsFromBucket();
     }
-    public void showAllProductsFromBucket(){
+    public void showAllProductsFromBucket() throws SQLException {
         helper.showListToConsole(db_online_shop.getAllProductsFromBucket());
     }
-    public List<Product> getAllProductsFromBucket(){
+    public List<Product> getAllProductsFromBucket() throws SQLException {
         return db_online_shop.getAllProductsFromBucket();
     }
     public void deleteProductFromBucket(Product product){

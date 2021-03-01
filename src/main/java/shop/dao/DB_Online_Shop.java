@@ -1,4 +1,4 @@
-package shop.utils.db_imitation;
+package shop.dao;
 import lombok.Data;
 import shop.model.*;
 import shop.services.ProductService;
@@ -151,7 +151,7 @@ public class DB_Online_Shop {
 
 
     }
-    public List<Product> getAllProductsFromBucket(){
+    public List<Product> getAllProductsFromBucket() throws SQLException {
         List<Product> productListFromBucket = new ArrayList<>();
         for(Product product: bucket){
             productListFromBucket.add(product);
@@ -176,12 +176,23 @@ public class DB_Online_Shop {
         }
         return notFoodList;
     }
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() throws SQLException {
         List<Product> productList = new ArrayList<>();
-        for(Product product: this.productList){
-                productList.add(product);
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * from products");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()){
+            int id = resultSet.getInt("product_id");
+            String name = resultSet.getString("name");
+            long price = resultSet.getLong("price");
+            productList.add(new Food(id,name,price));
         }
         return productList;
+    }
+
+    public void deleteProductById(int id) throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("delete  from products where product_id like '"+id+"'");
+        preparedStatement.execute();
+        preparedStatement.close();
     }
 
 

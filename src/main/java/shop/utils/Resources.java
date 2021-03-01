@@ -1,7 +1,7 @@
 package shop.utils;
 
 import lombok.Data;
-import shop.utils.db_imitation.DB_Online_Shop;
+import shop.dao.DB_Online_Shop;
 
 @Data
 public class Resources {
