@@ -1,11 +1,13 @@
 package shop.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import shop.utils.annotations.SetLastUseDate;
 
 import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
 public class Food extends Product implements Expirable  {
     private static long serialVersionUUID = 1095611956833581415L;
     private int expirationDays=0;
@@ -30,6 +32,8 @@ public class Food extends Product implements Expirable  {
     public Food(int id, String name, long price) {
         super(id, name, price);
     }
+
+
 
     @Override
     public String toString() {

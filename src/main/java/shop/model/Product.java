@@ -1,10 +1,13 @@
 package shop.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Bean;
 
 import java.io.Serializable;
 
 @Data
+@NoArgsConstructor
 
 public abstract class Product implements Serializable {
     int id;
