@@ -9,7 +9,8 @@ import shop.model.Product;
 import java.sql.SQLException;
 import java.util.List;
 
-@Controller("/")
+@Controller
+@RequestMapping(value = "/")
 public class ProductController {
     private ProductDAO productDAO = new ProductDAO();
     @GetMapping("list")
