@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan("shop.*")
+@ComponentScan(basePackages = "shop.*")
 public class WebConfig {
     @Bean
     public InternalResourceViewResolver viewResolver() {
