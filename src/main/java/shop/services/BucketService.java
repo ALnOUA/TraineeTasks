@@ -1,5 +1,6 @@
 package shop.services;
 
+import org.springframework.stereotype.Service;
 import shop.model.Product;
 import shop.model.User;
 import shop.utils.Helper;
@@ -8,7 +9,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static shop.utils.Resources.db_online_shop;
-
 
 public class BucketService {
 

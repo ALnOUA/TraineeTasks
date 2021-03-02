@@ -1,6 +1,7 @@
 package shop.services;
 
 import lombok.Data;
+import org.springframework.stereotype.Service;
 import shop.model.CurrencyPicker;
 import shop.model.Expirable;
 import shop.model.Food;

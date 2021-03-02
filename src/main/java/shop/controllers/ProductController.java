@@ -1,9 +1,9 @@
 package shop.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import shop.dao.DB_Online_Shop;
 import shop.dao.ProductDAO;
 import shop.model.Product;
 import java.sql.SQLException;
@@ -12,7 +12,10 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/")
 public class ProductController {
-    private ProductDAO productDAO = new ProductDAO();
+    
+    @Autowired
+    private ProductDAO productDAO;
+
     @GetMapping("list")
     public ModelAndView getListProduct() {
         ModelAndView mv = new ModelAndView();
@@ -22,7 +25,7 @@ public class ProductController {
         return mv;
     }
     @PostMapping("insert")
-    public ModelAndView insertProduct(@RequestParam("name") String name, @RequestParam("price") String price) throws SQLException {
+    public ModelAndView insertProduct(@RequestParam("name") String name, @RequestParam("price") String price) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("product-form.jsp");
         long priceLong = Long.valueOf(price);
