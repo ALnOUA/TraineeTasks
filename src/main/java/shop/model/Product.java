@@ -3,12 +3,13 @@ package shop.model;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
 @Data
 @NoArgsConstructor
-
+@Component
 public abstract class Product implements Serializable {
     int id;
     Currency currency;

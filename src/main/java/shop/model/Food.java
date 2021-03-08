@@ -2,12 +2,14 @@ package shop.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.stereotype.Component;
 import shop.utils.annotations.SetLastUseDate;
 
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
+@Component
 public class Food extends Product implements Expirable  {
     private static long serialVersionUUID = 1095611956833581415L;
     private int expirationDays=0;
