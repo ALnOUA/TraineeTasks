@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Product Manager</title>
+</head>
+<body>
+<div align="center">
+    <h1>Product List</h1>
+    <a href="food/new">Create New Food</a>
+    <a href="notFood/new">Create New Not Food</a>
+    <a href="/">Home</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Material</th>
+            <th>Expiration days</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${listProducts} ">
+            <td th:text="${product.getProduct_id()}">Product ID</td>
+            <td th:text="${product.getName()}">Name</td>
+            <td th:text="${product.getPrice()}">Price</td>
+            <td th:text="${product.getMaterial()}">Material</td>
+            <td th:text="${product.getExpirationDays()}">Expiration days</td>
+
+            <td>
+                <a th:href="@{'product/edit/' + ${product.getProduct_id()}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;
+                <a th:href="@{'product/delete/' + ${product.getProduct_id()}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

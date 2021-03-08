@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Create New Food</title>
+</head>
+<body>
+<div align="center">
+    <h1>Create New Food</h1>
+    <br />
+    <form action="#" th:action="@{save}" th:object="${food}"
+          method="post">
+
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>Product Name:</td>
+                <td><input type="text" th:field="*{name}" /></td>
+            </tr>
+            <tr>
+                <td>Price:</td>
+                <td><input type="text" th:field="*{price}" /></td>
+            </tr>
+            <tr>
+            <tr>
+                <td>Expiration Days:</td>
+                <td><input type="text" th:field="*{expirationDays}" /></td>
+            </tr>
+            <tr>
+                <td>Use before:</td>
+                <td><input type="datetime-local" th:field="*{useBeforeData}" /></td>
+            </tr>
+            <tr>
+                <td>Country:</td>
+                    <select class="form-control" name="example" id="example">
+                        <option value="0">ALL</option>
+                        <option th:each="country : ${countries}" th:value="${country.getCountry_id()}" th:text="${country.getName()}">
+                        </option>
+                    </select>
+            </tr>
+            <tr>
+            <tr>
+                <td colspan="2"><button type="submit">Save</button> </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

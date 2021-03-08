@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Not Food Manager</title>
+</head>
+<body>
+<div align="center">
+    <h1>Not Food List</h1>
+    <a href="notfood/new">Create New Not Food</a>
+    <a href="/">Home</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Not Food ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Material </th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="notfood : ${listNotFoods} ">
+            <td th:text="${notfood.getProduct_id()}">Product ID</td>
+            <td th:text="${notfood.getName()}">Name</td>
+            <td th:text="${notfood.getPrice()}">Price</td>
+            <td th:text="${notfood.getMaterial()}">Material</td>
+            <td>
+                <a th:href="@{'notfood/edit/' + ${notfood.getProduct_id()}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;
+                <a th:href="@{'notfood/delete/' + ${notfood.getProduct_id()}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

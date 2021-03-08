@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>Edit Food</title>
+</head>
+<body>
+<div align="center">
+    <h1>Edit Food</h1>
+    <br />
+    <form action="#" th:action="@{/food/save}" th:object="${food}"
+          method="post">
+
+        <table border="0" cellpadding="10">
+            <tr>
+                <td>Food ID:</td>
+                <td>
+                    <input type="text" th:field="*{getProduct_id()}" readonly="readonly" />
+                </td>
+            </tr>
+            <tr>
+                <td>Food Name:</td>
+                <td>
+                    <input type="text" th:field="*{getName()}" />
+                </td>
+            <tr>
+                <td>Price:</td>
+                <td><input type="text" th:field="*{getPrice()}" /></td>
+            </tr>
+            <tr>
+            <tr>
+                <td>Expiration days:</td>
+                <td><input type="text" th:field="*{getExpirationDays()}" /></td>
+            </tr>
+            <tr>
+            <tr>
+                <td>Use before:</td>
+                <td><input type="datetime-local" th:field="*{getUseBeforeData()}" /></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">Save</button> </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

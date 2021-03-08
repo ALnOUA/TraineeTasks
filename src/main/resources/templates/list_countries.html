@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Country Manager</title>
+</head>
+<body>
+<div align="center">
+    <h1>Country List</h1>
+    <a href="country/new">Create New Country</a>
+    <a href="/">Home page</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Country ID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="country : ${listCountries}">
+            <td th:text="${country.getCountry_id()}">Country ID</td>
+            <td th:text="${country.getName()}">Name</td>
+            <td>
+                <a th:href="@{'country/edit/' + ${country.getCountry_id()}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;
+                <a th:href="@{'country/delete/' + ${country.getCountry_id()}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

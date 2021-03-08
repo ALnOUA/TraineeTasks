@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Currency Manager</title>
+</head>
+<body>
+<div align="center">
+    <h1>Currency List</h1>
+    <a href="currency/new">Create New Currency</a>
+    <a href="/">Home page</a>
+    <br/><br/>
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Currency ID</th>
+            <th>International code</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Multiplicity</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="currency : ${listCurrencies}">
+            <td th:text="${currency.getCurrency_id()}">Currency ID</td>
+            <td th:text="${currency.getInternationalCode()}">International code</td>
+            <td th:text="${currency.getName()}">Name</td>
+            <td th:text="${currency.getCourse()}">Course</td>
+            <td th:text="${currency.getMultiplicity()}">Multiplicity</td>
+            <td>
+                <a th:href="@{'currency/edit/' + ${currency.getCurrency_id()}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;
+                <a th:href="@{'currency/delete/' + ${currency.getCurrency_id()}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
