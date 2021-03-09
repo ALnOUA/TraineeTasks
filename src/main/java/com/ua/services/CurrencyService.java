@@ -4,6 +4,7 @@ import com.ua.model.Currency;
 import com.ua.repositories.CurrencyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,6 +15,7 @@ import javax.persistence.criteria.Root;
 import java.util.List;
 
 @Service
+@Transactional
 public class CurrencyService {
     @Autowired
     private CurrencyRepository repo;

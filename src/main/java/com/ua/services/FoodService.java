@@ -1,12 +1,12 @@
 package com.ua.services;
 
-import java.util.List;
-
 import com.ua.model.Food;
 import com.ua.repositories.FoodRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional

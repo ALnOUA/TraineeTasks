@@ -19,33 +19,26 @@ public class NotFoodController {
 
     @GetMapping("")
     public String viewProductPage(Model model) {
-        List<NotFood> listNotFoods = service.listAll();
-        model.addAttribute("listNotFoods", listNotFoods);
-
+        model.addAttribute("listNotFoods", service.listAll());
         return "list_notfoods";
     }
 
     @GetMapping("/new")
     public String showNewProductPage(Model model) {
-        NotFood notFood = new NotFood();
-        model.addAttribute("notfood", notFood);
-
+        model.addAttribute("notfood", new NotFood());
         return "new_notfood";
     }
 
     @PostMapping(value = "/save")
     public String saveProduct(@ModelAttribute("food") NotFood notFood) {
         service.save(notFood);
-
         return "redirect:/notfood";
     }
 
     @GetMapping("/edit/{id}")
     public ModelAndView showEditProductPage(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit_notfood");
-        NotFood notFood = service.get(id);
-        mav.addObject("notfood", notFood);
-
+        mav.addObject("notfood", service.get(id));
         return mav;
     }
 

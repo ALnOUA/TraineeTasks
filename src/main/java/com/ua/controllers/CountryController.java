@@ -1,7 +1,5 @@
 package com.ua.controllers;
 
-import java.util.List;
-
 import com.ua.model.Country;
 import com.ua.services.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,33 +17,26 @@ public class CountryController {
 
     @GetMapping
     public String viewHomePage(Model model) {
-        List<Country> listCountries = service.listAll();
-        model.addAttribute("listCountries", listCountries);
-
+        model.addAttribute("listCountries", service.listAll());
         return "list_countries";
     }
 
     @GetMapping("/new")
     public String showNewCountryPage(Model model) {
-        Country country = new Country();
-        model.addAttribute("country", country);
-
+        model.addAttribute("country", new Country());
         return "new_country";
     }
 
     @PostMapping("/save")
     public String saveCountry(@ModelAttribute("currency") Country country) {
         service.save(country);
-
         return "redirect:/country";
     }
 
     @GetMapping("/edit/{id}")
     public ModelAndView showEditCountryPage(@PathVariable(name = "id") long id) {
         ModelAndView mav = new ModelAndView("edit_country");
-        Country country = service.get(id);
-        mav.addObject("country", country);
-
+        mav.addObject("country", service.get(id));
         return mav;
     }
 

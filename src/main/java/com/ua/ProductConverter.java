@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 @Component
 public class ProductConverter {
     public List<ProductDto> listProductDto(List<? extends Product> products){
-       return products.stream().map(x->entityToDto(x)).collect(Collectors.toList());
+       return products.stream().map(this::entityToDto).collect(Collectors.toList());
     }
 
     public ProductDto entityToDto(Object o){

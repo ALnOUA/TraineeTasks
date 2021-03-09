@@ -1,9 +1,7 @@
 package com.ua.controllers;
 
-import java.util.List;
-
-import com.ua.services.CurrencyService;
 import com.ua.model.Currency;
+import com.ua.services.CurrencyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,33 +17,26 @@ public class CurrencyController {
 
     @GetMapping
     public String viewHomePage(Model model) {
-        List<Currency> listCurrencies = service.listAll();
-        model.addAttribute("listCurrencies", listCurrencies);
-
+        model.addAttribute("listCurrencies", service.listAll());
         return "list_currencies";
     }
 
     @GetMapping("/new")
     public String showNewCurrencyPage(Model model) {
-        Currency currency = new Currency();
-        model.addAttribute("currency", currency);
-
+        model.addAttribute("currency", new Currency());
         return "new_currency";
     }
 
     @PostMapping("/save")
     public String saveCurrency(@ModelAttribute("currency") Currency currency) {
         service.save(currency);
-
         return "redirect:/currency";
     }
 
     @GetMapping("/edit/{id}")
     public ModelAndView showEditCurrencyPage(@PathVariable(name = "id") long id) {
         ModelAndView mav = new ModelAndView("edit_currency");
-        Currency currency = service.get(id);
-        mav.addObject("currency", currency);
-
+        mav.addObject("currency", service.get(id));
         return mav;
     }
 

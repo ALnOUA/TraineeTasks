@@ -20,26 +20,7 @@ public class ProductController {
 
 	@GetMapping("")
 	public String viewProductPage(Model model) {
-		Collection<ProductDto> listProducts= new ArrayList<>();
-		listProducts.addAll(productService.listAll());
-		model.addAttribute("listProducts", listProducts);
+		model.addAttribute("listProducts", productService.listAll());
 		return "list_product";
 	}
-
-
-	
-/*	@GetMapping("/edit/{product_id}")
-	public ModelAndView showEditProductPage(@PathVariable(name = "product_id") int product_id) {
-		ModelAndView mav = new ModelAndView("edit_product");
-		Product product = service.get(product_id);
-		mav.addObject("product", product);
-		
-		return mav;
-	}*/
-	
-	/*@GetMapping("/delete/{product_id}")
-	public String deleteProduct(@PathVariable(name = "product_id") int product_id) {
-		service.delete(product_id);
-		return "redirect:/product";
-	}*/
 }
