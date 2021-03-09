@@ -1,11 +1,8 @@
 package com.ua.controllers;
 
-import java.util.List;
-
-import com.ua.model.Country;
+import com.ua.model.Food;
 import com.ua.services.CountryService;
 import com.ua.services.FoodService;
-import com.ua.model.Food;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,19 +20,14 @@ public class FoodController {
 
     @GetMapping("")
     public String viewProductPage(Model model) {
-        List<Food> listFoods = service.listAll();
-        model.addAttribute("listFoods", listFoods);
-
+        model.addAttribute("listFoods", service.listAll());
         return "list_foods";
     }
 
 	@GetMapping("/new")
 	public String showNewProductPage(Model model) {
-		Food food = new Food();
-        List<Country> countries = countryService.listAll();
-		model.addAttribute("food", food);
-		model.addAttribute("countries", countries);
-
+		model.addAttribute("food", new Food());
+		model.addAttribute("countries", countryService.listAll());
 		return "new_food";
 	}
 
@@ -48,8 +40,7 @@ public class FoodController {
     @GetMapping("/edit/{id}")
     public ModelAndView showEditProductPage(@PathVariable(name = "id") int id) {
         ModelAndView mav = new ModelAndView("edit_food");
-        Food food = service.get(id);
-        mav.addObject("food", food);
+        mav.addObject("food", service.get(id));
 
         return mav;
     }
